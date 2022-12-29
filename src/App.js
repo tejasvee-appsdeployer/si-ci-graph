@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import LineGraph from "./components/LineGraph";
+import CalculateInterest from "./components/Graph";
 
 const App = () => {
 	const [principal, setPrincipal] = useState(0);
@@ -17,46 +17,48 @@ const App = () => {
 	};
 
 	return (
+		// 	<div>
+		// 		<h1>Simple Interest Calculator</h1>
+		// 		<label>
+		// 			Principal:
+		// 			<input
+		// 				type="number"
+		// 				value={principal}
+		// 				onChange={(e) => setPrincipal(e.target.value)}
+		// 			/>
+		// 		</label>
+		// 		<br />
+		// 		<label>
+		// 			Rate:
+		// 			<input
+		// 				type="number"
+		// 				value={rate}
+		// 				onChange={(e) => setRate(e.target.value)}
+		// 			/>
+		// 		</label>
+		// 		<br />
+		// 		<label>
+		// 			Duration:
+		// 			<input
+		// 				type="number"
+		// 				value={duration}
+		// 				onChange={(e) => setDuration(e.target.value)}
+		// 			/>
+		// 		</label>
+		// 		<br />
+		// 		<button onClick={calculateSimpleInterest}>
+		// 			Calculate Simple Interest
+		// 		</button>
+		// 		<br />
+		// 		<button onClick={calculateCompoundInterest}>
+		// 			Calculate Compound Interest
+		// 		</button>
+		// 		<br />
+		// 		<h2>Simple Interest: {simpleInterest}</h2>
+		// 		<h2>Compound Interest: {compoundInterest}</h2>
+		// 	</div>
 		<div>
-			<h1>Simple Interest Calculator</h1>
-			<label>
-				Principal:
-				<input
-					type="number"
-					value={principal}
-					onChange={(e) => setPrincipal(e.target.value)}
-				/>
-			</label>
-			<br />
-			<label>
-				Rate:
-				<input
-					type="number"
-					value={rate}
-					onChange={(e) => setRate(e.target.value)}
-				/>
-			</label>
-			<br />
-			<label>
-				Duration:
-				<input
-					type="number"
-					value={duration}
-					onChange={(e) => setDuration(e.target.value)}
-				/>
-			</label>
-			<br />
-			<button onClick={calculateSimpleInterest}>
-				Calculate Simple Interest
-			</button>
-			<br />
-			<button onClick={calculateCompoundInterest}>
-				Calculate Compound Interest
-			</button>
-			<br />
-			<h2>Simple Interest: {simpleInterest}</h2>
-			<h2>Compound Interest: {compoundInterest}</h2>
-			<LineGraph />
+			<CalculateInterest />
 		</div>
 	);
 };
