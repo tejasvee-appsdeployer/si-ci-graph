@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import LineGraph from "./components/LineGraph";
 
 const App = () => {
 	const [principal, setPrincipal] = useState(0);
@@ -55,6 +56,7 @@ const App = () => {
 			<br />
 			<h2>Simple Interest: {simpleInterest}</h2>
 			<h2>Compound Interest: {compoundInterest}</h2>
+			<LineGraph />
 		</div>
 	);
 };
