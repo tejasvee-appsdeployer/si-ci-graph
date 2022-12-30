@@ -8,27 +8,18 @@ const App = () => {
 	const [duration, setDuration] = useState(0);
 	const [simpleInterest, setSimpleInterest] = useState(0);
 	const [compoundInterest, setCompoundInterest] = useState(0);
-	const [unit, setUnit] = useState("year");
 
 	const calculateSimpleInterest = () => {
-		if (unit === "months") {
-			setUnit("years");
-			setDuration(duration / 12);
-		}
 		setSimpleInterest((principal * rate * duration) / 100);
 	};
 
 	const calculateCompoundInterest = () => {
-		if (unit === "months") {
-			setUnit("years");
-			setDuration(duration / 12);
-		}
 		setCompoundInterest(principal * (1 + rate / 100) ** duration - principal);
 	};
 
 	return (
 		<div className="App">
-			<h1 className="text-center">Interest Calculator</h1>
+			<h1 className="text-center my-4">Interest Calculator</h1>
 			<Form>
 				<Row className="g-2">
 					<Col md>
@@ -63,7 +54,7 @@ const App = () => {
 						<FloatingLabel
 							className="mb-2"
 							controlId="floatingInput"
-							label={`Duration (in ${unit})`}
+							label={`Duration (in years)`}
 						>
 							<Form.Control
 								type="number"
@@ -71,17 +62,6 @@ const App = () => {
 								onChange={(e) => setDuration(e.target.value)}
 							/>
 						</FloatingLabel>
-					</Col>
-					<Col md>
-						<Form.Select
-							className="mb-2"
-							label="Unit Type"
-							onChange={(e) => setUnit(e.target.value)}
-						>
-							<option value="years">Duration Unit</option>
-							<option value="years">Years</option>
-							<option value="months">Months</option>
-						</Form.Select>
 					</Col>
 				</Row>
 				<div className="d-flex justify-content-between">
