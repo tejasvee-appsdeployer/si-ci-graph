@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import "./App.css";
 import { Button, Col, FloatingLabel, Form, Row } from "react-bootstrap";
+import { Line } from "react-chartjs-2";
+import { Chart as ChartJS } from "chart.js/auto";
 
 const App = () => {
 	const [principal, setPrincipal] = useState(0);
@@ -15,6 +17,47 @@ const App = () => {
 
 	const calculateCompoundInterest = () => {
 		setCompoundInterest(principal * (1 + rate / 100) ** duration - principal);
+	};
+
+	const calculateInterest = () => {
+		const simpleInterestData = [principal];
+		const compoundInterestData = [principal];
+		let simpleInterest = principal;
+		let compoundInterest = principal;
+		for (let i = 0; i < duration; i++) {
+			simpleInterest += simpleInterest * (rate / 100);
+			compoundInterest += compoundInterest * (rate / 100);
+			simpleInterestData.push(simpleInterest);
+			compoundInterestData.push(compoundInterest);
+		}
+		return [simpleInterestData, compoundInterestData];
+	};
+	const getLabels = () => {
+		let years = [];
+		for (let year = 1; year <= duration; year += 1) {
+			years.push(`Year ${year}`);
+		}
+		return years;
+	};
+
+	const [simpleInterestData, compoundInterestData] = calculateInterest();
+
+	const data = {
+		labels: getLabels(),
+		datasets: [
+			{
+				label: "Simple Interest",
+				data: simpleInterestData,
+				borderColor: "#3e95cd",
+				fill: false,
+			},
+			{
+				label: "Compound Interest",
+				data: compoundInterestData,
+				borderColor: "#8e5ea2",
+				fill: false,
+			},
+		],
 	};
 
 	return (
@@ -64,19 +107,42 @@ const App = () => {
 						</FloatingLabel>
 					</Col>
 				</Row>
-				<div className="d-flex justify-content-between">
-					<Button variant="primary" onClick={calculateSimpleInterest}>
-						Calculate SI
+				<Row className="g-2">
+					<Button
+						className=""
+						variant="success"
+						onClick={() => {
+							calculateCompoundInterest();
+							calculateSimpleInterest();
+						}}
+					>
+						Calculate
 					</Button>
-					<Button variant="primary" onClick={calculateCompoundInterest}>
-						Calculate CI
-					</Button>
-				</div>
+				</Row>
 				<Form.Text>
 					<h3>Simple Interest: Rs.{simpleInterest}</h3>
 					<h3>Compound Interest: Rs.{compoundInterest}</h3>
 				</Form.Text>
 			</Form>
+			<Line
+				data={data}
+				options={{
+					title: {
+						display: true,
+						text: "Interest over Time",
+					},
+					scales: {
+						yAxes: [
+							{
+								scaleLabel: {
+									display: true,
+									labelString: "Amount",
+								},
+							},
+						],
+					},
+				}}
+			/>
 		</div>
 	);
 };
