@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Line } from "react-chartjs-2";
 import { Chart as ChartJS } from "chart.js/auto";
 
@@ -94,7 +94,7 @@ const LineGraph = () => {
 
 	return (
 		<div className="row">
-			<div className="col-3">
+			<div className="col-lg-3">
 				<form onSubmit={handleSubmit}>
 					<h2 className="text-center">Interest Calculator</h2>
 					<div className="mb-3">
@@ -147,7 +147,7 @@ const LineGraph = () => {
 				<p>Simple Interest: Rs.{si}</p>
 				<p>Compound Interest: Rs.{ci}</p>
 			</div>
-			<div className="col">
+			<div className="col-lg-8">
 				<Line className="" data={data} options={options} />
 			</div>
 		</div>
